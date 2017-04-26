@@ -1,4 +1,3 @@
 # LastHit
-A 3D game inspired by League of Legends built using Unity Game Engine. Edit
-Add topics
+A 3D Two-Player game inspired by League of Legends built using Unity Game Engine.
 
