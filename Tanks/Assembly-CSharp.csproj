@@ -94,6 +94,9 @@
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TankManager.cs" />
      <Compile Include="Assets\Scripts\Shell\ShellExplosion.cs" />
+     <Compile Include="Assets\Scripts\Soldier\SoldierHealth.cs" />
+     <Compile Include="Assets\Scripts\Soldier\SoldierMovement.cs" />
+     <Compile Include="Assets\Scripts\Soldier\SoldierShooting.cs" />
      <Compile Include="Assets\Scripts\Tank\BigTankShooting.cs" />
      <Compile Include="Assets\Scripts\Tank\TankHealth.cs" />
      <Compile Include="Assets\Scripts\Tank\TankMovement.cs" />

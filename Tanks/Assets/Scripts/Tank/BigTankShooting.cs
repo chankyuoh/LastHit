@@ -41,7 +41,7 @@ public class BigTankShooting : MonoBehaviour
     private void Update()
     {
         // Track the current state of the fire button and make decisions based on the current launch force.
-		Fire();
+		//Fire();
 		m_AimSlider.value = m_MinLaunchForce;
 		if (m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired) {
 			//at max charge, haven't fired yet
