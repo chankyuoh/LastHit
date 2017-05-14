@@ -11,14 +11,14 @@ public class GameManager : MonoBehaviour
     public CameraControl m_CameraControl;   
     public Text m_MessageText;              
     public GameObject m_TankPrefab;         
-    public TankManager[] m_Tanks;           
+    public SoldierManager[] m_Tanks;           
 
 
     private int m_RoundNumber;              
     private WaitForSeconds m_StartWait;     
     private WaitForSeconds m_EndWait;       
-    private TankManager m_RoundWinner;
-    private TankManager m_GameWinner;       
+    private SoldierManager m_RoundWinner;
+    private SoldierManager m_GameWinner;       
 
 
     private void Start()
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private TankManager GetRoundWinner()
+    private SoldierManager GetRoundWinner()
     {
         for (int i = 0; i < m_Tanks.Length; i++)
         {
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private TankManager GetGameWinner()
+    private SoldierManager GetGameWinner()
     {
         for (int i = 0; i < m_Tanks.Length; i++)
         {

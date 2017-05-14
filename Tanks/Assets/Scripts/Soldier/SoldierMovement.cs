@@ -2,9 +2,9 @@
 
 public class SoldierMovement : MonoBehaviour
 {
-    public int m_PlayerNumber = 1;         
+	public int m_PlayerNumber;       
     public float m_Speed = 9f;            
-    public float m_TurnSpeed = 180f;            
+    public float m_TurnSpeed = 180f;
 
     
     private string m_MovementAxisName;     
@@ -42,6 +42,7 @@ public class SoldierMovement : MonoBehaviour
         m_MovementAxisName = "Vertical" + m_PlayerNumber;
         m_TurnAxisName = "Horizontal" + m_PlayerNumber;
 
+
     }
     
 
@@ -50,6 +51,7 @@ public class SoldierMovement : MonoBehaviour
         // Store the player's input and make sure the audio for the engine is playing.
 		m_MovementInputValue = Input.GetAxis(m_MovementAxisName); // value from -1 to 1
 		m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
+//		anim.Play ();
     }
 
 
@@ -70,6 +72,9 @@ public class SoldierMovement : MonoBehaviour
         // Adjust the position of the tank based on the player's input.
 		Vector3 movement = transform.forward*m_MovementInputValue* m_Speed * Time.deltaTime;
 		m_Rigidbody.MovePosition (m_Rigidbody.position + movement);
+
+
+
     }
 
 
