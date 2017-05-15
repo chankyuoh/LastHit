@@ -2,8 +2,14 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Soldier/SoldierShooting.cs">
     <Files>
-      <File FileName="Assets/Scripts/Soldier/SoldierHealth.cs" Line="13" Column="5" />
-      <File FileName="Assets/Scripts/Soldier/SoldierShooting.cs" Line="15" Column="36" />
+      <File FileName="Assets/Scripts/Soldier/SoldierMovement.cs" Line="5" Column="28" />
+      <File FileName="Assets/Scripts/Soldier/SoldierShooting.cs" Line="8" Column="31" />
+      <File FileName="Assets/SoldierAnimation.cs" Line="10" Column="36" />
+      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="133" Column="1" />
+      <File FileName="Assets/Scripts/Managers/SoldierManager.cs" Line="35" Column="3" />
+      <File FileName="Assets/Scripts/Soldier/SoldierHealth.cs" Line="87" Column="19" />
+      <File FileName="Assets/Scripts/Shell/ShellExplosion.cs" Line="24" Column="27" />
+      <File FileName="Assets/Scripts/Tank/TankHealth.cs" Line="58" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
