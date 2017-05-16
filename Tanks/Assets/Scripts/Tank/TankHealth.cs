@@ -19,10 +19,8 @@ public class TankHealth : MonoBehaviour
 
     private void Awake()
     {
-		print (GetInstanceID());
 		if (this.tag == "BigTank") {
 			m_StartingHealth = 3000f;
-			print ("set starting health");
 		}
         m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
         m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();

@@ -10,6 +10,8 @@ public class SoldierHealth : MonoBehaviour
     public Color m_ZeroHealthColor = Color.red;    
     public GameObject m_ExplosionPrefab;
 	public int m_PlayerNumber;
+
+	public static bool m_didLastHit;
     
     private AudioSource m_ExplosionAudio;          
     private ParticleSystem m_ExplosionParticles;   
@@ -21,8 +23,8 @@ public class SoldierHealth : MonoBehaviour
     {
 		if (this.tag == "BigTank") {
 			m_StartingHealth = 100f;
-			print ("set starting health");
 		}
+//		m_didLastHit = false;
         m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
         m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
 
@@ -48,10 +50,14 @@ public class SoldierHealth : MonoBehaviour
 			if (this.tag == "BigTank") {
 				if (shellName == "shell1") {
 					print ("PLAYER 1 WON!!");
+					m_didLastHit = true;
+					setDidLastHit ();
 				} else if (shellName == "shell2") {
 					print ("PLAYER 2 WON!!");
+					m_didLastHit = true;
+					setDidLastHit ();
 				} else {
-					print ("idk whats going on");
+					print ("what happen");
 				}
 			}
 
@@ -79,7 +85,7 @@ public class SoldierHealth : MonoBehaviour
     private void OnDeath()
     {
         // Play the effects for the death of the tank and deactivate it.
-		print("in on death");
+
 		m_Dead = true;
 		m_ExplosionParticles.transform.position = transform.position;
 		m_ExplosionParticles.gameObject.SetActive (true);
@@ -88,4 +94,14 @@ public class SoldierHealth : MonoBehaviour
 		gameObject.SetActive (false);
 
     }
+
+	public void setDidLastHit() {
+		m_didLastHit = true;
+	}
+
+	public bool getDidLastHit(){
+		print ("getLastHit is: " + m_didLastHit);
+		return m_didLastHit;
+	}
+		
 }
