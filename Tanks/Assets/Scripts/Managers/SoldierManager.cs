@@ -69,12 +69,23 @@ public class SoldierManager
         m_Instance.transform.position = m_SpawnPoint.position;
         m_Instance.transform.rotation = m_SpawnPoint.rotation;
 
+		m_Shooting.m_UltUsed = false;
+
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
     }
 
-	public bool isRoundWinner() {
-		return m_Health.getDidLastHit();
+	public int getRoundWinner() {
+		if (m_PlayerNumber == 1 && m_Health.getDidLastHit1 ()) {
+			return 1;
+		} else if (m_PlayerNumber == 2 && m_Health.getDidLastHit2 ()) {
+			return 2;
+		} 
+		else 
+		{
+			return -1;
+
+		}
 	}
 
 }

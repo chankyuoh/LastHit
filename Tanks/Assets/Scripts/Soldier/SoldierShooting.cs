@@ -22,7 +22,7 @@ public class SoldierShooting : MonoBehaviour
     private float m_CurrentLaunchForce;  
     private float m_ChargeSpeed;         
     private bool m_Fired;
-	private bool m_UltUsed;
+	public bool m_UltUsed;
 
 
     private void OnEnable()

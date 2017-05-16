@@ -62,7 +62,7 @@ public class BigTankManager
     }
 
 	public bool isRoundWinner() {
-		return SoldierHealth.m_didLastHit;
+		return SoldierHealth.m_didLastHit1;
 	}
 
 }

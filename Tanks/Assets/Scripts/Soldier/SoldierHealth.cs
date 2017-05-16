@@ -11,7 +11,8 @@ public class SoldierHealth : MonoBehaviour
     public GameObject m_ExplosionPrefab;
 	public int m_PlayerNumber;
 
-	public static bool m_didLastHit;
+	public static bool m_didLastHit1;
+	public static bool m_didLastHit2;
     
     private AudioSource m_ExplosionAudio;          
     private ParticleSystem m_ExplosionParticles;   
@@ -50,12 +51,10 @@ public class SoldierHealth : MonoBehaviour
 			if (this.tag == "BigTank") {
 				if (shellName == "shell1") {
 					print ("PLAYER 1 WON!!");
-					m_didLastHit = true;
-					setDidLastHit ();
+					m_didLastHit1 = true;
 				} else if (shellName == "shell2") {
 					print ("PLAYER 2 WON!!");
-					m_didLastHit = true;
-					setDidLastHit ();
+					m_didLastHit2 = true;
 				} else {
 					print ("what happen");
 				}
@@ -95,13 +94,18 @@ public class SoldierHealth : MonoBehaviour
 
     }
 
-	public void setDidLastHit() {
-		m_didLastHit = true;
+
+//
+	public bool getDidLastHit1(){
+		print ("getLastHit1 is: " + m_didLastHit1);
+		return m_didLastHit1;
 	}
 
-	public bool getDidLastHit(){
-		print ("getLastHit is: " + m_didLastHit);
-		return m_didLastHit;
+	public bool getDidLastHit2(){
+		print ("getLastHit2 is: " + m_didLastHit2);
+		return m_didLastHit2;
 	}
+
+
 		
 }

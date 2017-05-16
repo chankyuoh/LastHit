@@ -60,12 +60,14 @@ public class GameManager : MonoBehaviour
 
     private void SetCameraTargets()
     {
-        Transform[] targets = new Transform[m_Soldiers.Length];
+        Transform[] targets = new Transform[m_Soldiers.Length+1];
 
-        for (int i = 0; i < targets.Length; i++)
+        for (int i = 0; i < targets.Length-1; i++)
         {
             targets[i] = m_Soldiers[i].m_Instance.transform;
         }
+
+		targets [2] = m_BigTank [0].m_Instance.transform;
 
         m_CameraControl.m_Targets = targets;
     }
@@ -103,7 +105,7 @@ public class GameManager : MonoBehaviour
     {
 		EnableTankControl ();
 		m_MessageText.text = string.Empty;
-		while (BigTankLeft()) 
+		while (BigTankLeft() && !NoSoldiersLeft()) 
 		{
 			yield return null;
 		}
@@ -127,17 +129,18 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private bool OneTankLeft()
+    private bool NoSoldiersLeft()
     {
-        int numTanksLeft = 0;
+		int numSoldiersLeft = 0;
 
         for (int i = 0; i < m_Soldiers.Length; i++)
         {
             if (m_Soldiers[i].m_Instance.activeSelf)
-                numTanksLeft++;
+                numSoldiersLeft++;
         }
 
-        return numTanksLeft <= 1;
+        return numSoldiersLeft == 0;
+
     }
 
 	private bool BigTankLeft()
@@ -151,10 +154,11 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < m_Soldiers.Length; i++)
         {
-			print (m_Soldiers [i].isRoundWinner ());
-			print ("eol");
-			if (m_Soldiers[i].isRoundWinner()) {
-				print ("WOOHOO I WON IM TANK" + i);
+			if (m_Soldiers [i].getRoundWinner () == 1) {
+				print ("WOOHOO I WON IM TANK" + 1);
+				return m_Soldiers [i];
+			} else if (m_Soldiers [i].getRoundWinner () == 2) {
+				print ("WOOHOO I WON IM TANK" + 2);
 				return m_Soldiers [i];
 			}
         }
@@ -178,7 +182,7 @@ public class GameManager : MonoBehaviour
     private string EndMessage()
     {
         string message = "DRAW!";
-
+		print (m_RoundWinner.m_PlayerNumber);
         if (m_RoundWinner != null)
             message = m_RoundWinner.m_ColoredPlayerText + " WINS THE ROUND!";
 
