@@ -22,7 +22,7 @@ public class SoldierShooting : MonoBehaviour
     private float m_CurrentLaunchForce;  
     private float m_ChargeSpeed;         
     private bool m_Fired;
-	private bool m_UltUsed;
+	public bool m_UltUsed;
 
 
     private void OnEnable()
@@ -65,8 +65,8 @@ public class SoldierShooting : MonoBehaviour
 			//have we pressed fired for the first time?
 			m_Fired = false;
 			m_CurrentLaunchForce = m_MinLaunchForce;
-			m_ShootingAudio.clip = m_ChargingClip;
-			m_ShootingAudio.Play ();
+			//m_ShootingAudio.clip = m_ChargingClip;
+			//m_ShootingAudio.Play ();
 
 		} else if ((Input.GetButton (m_FireButton) || (Input.GetKey(m_UltButton) && !m_UltUsed)) && !m_Fired) {
 			// Holding the fire button, not yet fired
@@ -107,8 +107,6 @@ public class SoldierShooting : MonoBehaviour
 	private void UltFire()
 	{
 		// Instantiate and launch the shell.
-		print(m_UltUsed);
-		print("ultfire!!");
 		m_Fired = true;
 		Rigidbody rocketInstance = Instantiate (m_Rocket, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
 
@@ -119,7 +117,7 @@ public class SoldierShooting : MonoBehaviour
 //		m_ShootingAudio.Play ();
 		m_CurrentLaunchForce = m_MinLaunchForce;
 
-//		m_UltUsed = true;
+		m_UltUsed = true;
 
 
 

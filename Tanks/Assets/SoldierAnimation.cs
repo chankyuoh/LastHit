@@ -21,8 +21,7 @@ public class SoldierAnimation : MonoBehaviour {
 	void Update () {
 		m_MovementInputValue = Input.GetAxis(m_MovementAxisName);
 
-		if (Input.GetButtonDown (m_FireButton)){
-			print ("Shooting");
+		if (Input.GetButtonDown (m_FireButton)){	
 			anim.Play ("demo_combat_shoot");
 
 		}
