@@ -70,6 +70,8 @@ public class SoldierManager
         m_Instance.transform.rotation = m_SpawnPoint.rotation;
 
 		m_Shooting.m_UltUsed = false;
+		SoldierHealth.m_didLastHit1 = false;
+		SoldierHealth.m_didLastHit2 = false;
 
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
