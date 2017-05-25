@@ -6,12 +6,13 @@ public class BigTankManager
 {
     public Color m_PlayerColor;            
     public Transform m_SpawnPoint;         
-    [HideInInspector] public int m_PlayerNumber;             
+    [HideInInspector] public int m_PlayerNumber = 3;             
     [HideInInspector] public string m_ColoredPlayerText;
     [HideInInspector] public GameObject m_Instance;          
     [HideInInspector] public int m_Wins;                     
 
 	private SoldierHealth m_Health;
+	private BigTankShooting m_Shooting;
     private GameObject m_CanvasGameObject;
 
 
@@ -20,6 +21,8 @@ public class BigTankManager
 
 
 		m_Health = m_Instance.GetComponent<SoldierHealth>();
+		m_Shooting = m_Instance.GetComponent<BigTankShooting> ();
+		m_Shooting.m_PlayerNumber = m_PlayerNumber;
 
         m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
 
@@ -40,15 +43,19 @@ public class BigTankManager
 
     public void DisableControl()
     {
-
+		m_Shooting.CancelInvoke ();
+		m_Shooting.enabled = false;
         m_CanvasGameObject.SetActive(false);
+
     }
 
 
     public void EnableControl()
     {
-
+		m_Shooting.enabled = true;
         m_CanvasGameObject.SetActive(true);
+		m_Shooting.InvokeRepeating ("Fire", 0.0f, 1.0f);
+
     }
 
 
