@@ -18,16 +18,12 @@ public class BigTankManager
 
     public void Setup()
     {
-
-
 		m_Health = m_Instance.GetComponent<SoldierHealth>();
 		m_Shooting = m_Instance.GetComponent<BigTankShooting> ();
 		m_Shooting.m_PlayerNumber = m_PlayerNumber;
 
         m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
 
-
-		m_Health.m_PlayerNumber = m_PlayerNumber;
 
         m_ColoredPlayerText = "<color=#" + ColorUtility.ToHtmlStringRGB(m_PlayerColor) + ">PLAYER " + m_PlayerNumber + "</color>";
 
@@ -54,7 +50,7 @@ public class BigTankManager
     {
 		m_Shooting.enabled = true;
         m_CanvasGameObject.SetActive(true);
-		m_Shooting.InvokeRepeating ("Fire", 0.0f, 1.0f);
+		m_Shooting.InvokeRepeating ("Fire", 0.0f, 0.3f);
 
     }
 

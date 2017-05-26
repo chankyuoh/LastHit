@@ -32,8 +32,12 @@ public class ShellExplosion : MonoBehaviour
 			if (!targetHealth) {
 				continue;
 			}
-
 			float damage = CalculateDamage (targetRigidBody.position);
+			if (colliders [i].tag == "BigTank") 
+			{
+				damage = CalculateDamageToTank ();
+			}
+
 			targetHealth.TakeDamage (damage,this.name);
 		}
 
@@ -60,4 +64,10 @@ public class ShellExplosion : MonoBehaviour
 		damage = Mathf.Max (0f, damage);
 		return damage;
     }
+
+	private float CalculateDamageToTank()
+	{
+		// Damage to tank does not matter how far or close the bullet was hit from
+		return m_MaxDamage;
+	}
 }

@@ -22,9 +22,6 @@ public class SoldierHealth : MonoBehaviour
 
     private void Awake()
     {
-		if (this.tag == "BigTank") {
-			m_StartingHealth = 100f;
-		}
 //		m_didLastHit = false;
         m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
         m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
