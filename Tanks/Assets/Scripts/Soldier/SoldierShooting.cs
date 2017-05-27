@@ -22,6 +22,7 @@ public class SoldierShooting : MonoBehaviour
     private float m_CurrentLaunchForce;  
     private float m_ChargeSpeed;         
     private bool m_Fired;
+	private bool m_UltFired;
 	public bool m_UltUsed;
 
 
@@ -36,9 +37,9 @@ public class SoldierShooting : MonoBehaviour
     {
         m_FireButton = "Fire" + m_PlayerNumber;
 		if (m_PlayerNumber == 1) {
-			m_UltButton = "left shift";
+			m_UltButton = "ultLeft";
 		} else if (m_PlayerNumber == 2) {
-			m_UltButton = "right shift";
+			m_UltButton = "ultRight";
 		}
 		m_UltUsed = false;
 
@@ -50,43 +51,72 @@ public class SoldierShooting : MonoBehaviour
     private void Update()
     {
 		m_AimSlider.value = m_MinLaunchForce;
+		manageNormalFireInput ();
+		manageUltFireInput ();
+    }
+
+
+	private void manageNormalFireInput()
+	{
 		if ((m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired)) {
 			//at max charge, haven't fired yet
 			m_CurrentLaunchForce = m_MaxLaunchForce;
-			if (Input.GetKeyDown (m_UltButton)) {
-				UltFire ();
-			} else 
-			{
-				Fire ();
-			}
+			Fire ();
 
 
-		} else if (Input.GetButtonDown (m_FireButton) || (Input.GetKeyDown(m_UltButton) && !m_UltUsed)) {
+		} else if (Input.GetButtonDown (m_FireButton)) {
 			//have we pressed fired for the first time?
 			m_Fired = false;
 			m_CurrentLaunchForce = m_MinLaunchForce;
 			//m_ShootingAudio.clip = m_ChargingClip;
 			//m_ShootingAudio.Play ();
 
-		} else if ((Input.GetButton (m_FireButton) || (Input.GetKey(m_UltButton) && !m_UltUsed)) && !m_Fired) {
+		} else if ((Input.GetButton (m_FireButton)) && !m_Fired) {
 			// Holding the fire button, not yet fired
 			m_CurrentLaunchForce += m_ChargeSpeed*Time.deltaTime;
 			m_AimSlider.value = m_CurrentLaunchForce;
 			//			anim.Play ("demo_combat_shoot");
-		} else if ((Input.GetButtonUp (m_FireButton) || (Input.GetKeyUp(m_UltButton) && !m_UltUsed) && !m_Fired)) {
+		} else if ((Input.GetButtonUp (m_FireButton) && !m_Fired)) {
 			// released button
-			if (Input.GetKeyUp (m_UltButton)) {
+			//			if (Input.GetKeyUp (m_UltButton)) {
+			//				UltFire ();
+			//			} 
+			Fire ();
+		}
+	}
+
+	private void manageUltFireInput()
+	{
+		if (!m_UltUsed) 
+		{
+			if ((m_CurrentLaunchForce >= m_MaxLaunchForce && !m_UltFired)) {
+				//at max charge, haven't fired yet
+				m_CurrentLaunchForce = m_MaxLaunchForce;
 				UltFire ();
-			} 
-			else {
-				Fire ();
+
+
+			} else if (Input.GetButtonDown (m_UltButton)) {
+				//have we pressed fired for the first time?
+				m_UltFired = false;
+				m_CurrentLaunchForce = m_MinLaunchForce;
+				//m_ShootingAudio.clip = m_ChargingClip;
+				//m_ShootingAudio.Play ();
+
+			} else if ((Input.GetButton (m_UltButton)) && !m_UltFired) {
+				// Holding the fire button, not yet fired
+				m_CurrentLaunchForce += m_ChargeSpeed*Time.deltaTime;
+				m_AimSlider.value = m_CurrentLaunchForce;
+				//			anim.Play ("demo_combat_shoot");
+			} else if ((Input.GetButtonUp (m_UltButton) && !m_UltFired)) {
+				// released button
+				//			if (Input.GetKeyUp (m_UltButton)) {
+				//				UltFire ();
+				//			} 
+				UltFire ();
 			}
 		}
-    }
 
-
-
-
+	}
 
     private void Fire()
     {
@@ -106,9 +136,13 @@ public class SoldierShooting : MonoBehaviour
 
 	private void UltFire()
 	{
+		print ("Ult being fired");
 		// Instantiate and launch the shell.
-		m_Fired = true;
-		Rigidbody rocketInstance = Instantiate (m_Rocket, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+		m_UltFired = true;
+		print (m_FireTransform.position);
+		Transform m_UltFireTransform = m_FireTransform;
+		m_UltFireTransform.position.Set (m_UltFireTransform.position.x + 10f, m_UltFireTransform.position.y+4f, m_UltFireTransform.position.z+4f);
+		Rigidbody rocketInstance = Instantiate (m_Rocket, m_UltFireTransform.position, m_UltFireTransform.rotation) as Rigidbody;
 
 		rocketInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
 		rocketInstance.gameObject.name = "shell" + m_PlayerNumber;

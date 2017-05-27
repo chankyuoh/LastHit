@@ -11,12 +11,14 @@ public class SoldierHealth : MonoBehaviour
     public GameObject m_ExplosionPrefab;
 	public int m_PlayerNumber;
 
+
 	public static bool m_didLastHit1;
 	public static bool m_didLastHit2;
+	public static float m_tankHealth;
     
     private AudioSource m_ExplosionAudio;          
     private ParticleSystem m_ExplosionParticles;   
-    private float m_CurrentHealth;  
+    public float m_CurrentHealth;  
     private bool m_Dead;            
 
 
@@ -37,6 +39,7 @@ public class SoldierHealth : MonoBehaviour
 
         SetHealthUI();
     }
+		
 
 
 	public void TakeDamage(float amount, string shellName)
@@ -74,6 +77,11 @@ public class SoldierHealth : MonoBehaviour
 		} else {
 			m_FillImage.color = Color.Lerp (m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
 		}
+
+		if (m_PlayerNumber == 3 || this.tag == "BigTank"){
+			m_tankHealth = m_CurrentHealth;
+		}
+
 
     }
 
