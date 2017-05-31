@@ -14,7 +14,7 @@ public class SoldierManager
     private SoldierMovement m_Movement;       
     private SoldierShooting m_Shooting;
 	private SoldierAnimation m_Animation;
-	private SoldierHealth m_Health;
+	public SoldierHealth m_Health;
     private GameObject m_CanvasGameObject;
 
 

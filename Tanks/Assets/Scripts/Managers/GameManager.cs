@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject m_SoldierPrefab;
 	public GameObject m_BigTankPrefab;
 	public BigTankManager[] m_BigTank;
-    public SoldierManager[] m_Soldiers;           
+    public SoldierManager[] m_Soldiers;    
+	public static bool onePlayerLeft = false;
 
 
     private int m_RoundNumber;              
@@ -93,6 +94,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator RoundStarting()
     {
 		ResetAllTanks ();
+		onePlayerLeft = false;
 		DisableTankControl ();
 		m_CameraControl.SetStartPositionAndSize ();
 		m_RoundNumber++;
@@ -108,6 +110,23 @@ public class GameManager : MonoBehaviour
 		m_MessageText.text = string.Empty;
 		while (BigTankLeft() && !NoSoldiersLeft()) 
 		{
+			if (m_Soldiers [0].m_Instance.activeSelf && !m_Soldiers [1].m_Instance.activeSelf) {
+				onePlayerLeft = true;
+				m_Soldiers [0].m_Health.m_CurrentHealth -= .2f;
+				m_Soldiers [0].m_Health.SetHealthUI ();
+				if (m_Soldiers [0].m_Health.m_CurrentHealth < 0f) {
+					m_Soldiers [0].m_Health.OnDeath ();
+				}
+			} else if (!m_Soldiers [0].m_Instance.activeSelf && m_Soldiers [1].m_Instance.activeSelf) {
+				onePlayerLeft = true;
+				m_Soldiers [1].m_Health.m_CurrentHealth -= .2f;
+				m_Soldiers [1].m_Health.SetHealthUI ();
+				if (m_Soldiers [1].m_Health.m_CurrentHealth < 0f) {
+					m_Soldiers [1].m_Health.OnDeath ();
+				}
+			}
+
+
 			yield return null;
 		}
         
@@ -116,6 +135,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RoundEnding()
     {
+		onePlayerLeft = false;
 		DisableTankControl ();
 		DisableBigTankControl ();
 		m_RoundWinner = null;

@@ -65,7 +65,7 @@ public class SoldierHealth : MonoBehaviour
     }
 
 
-    private void SetHealthUI()
+    public void SetHealthUI()
     {
         // Adjust the value and colour of the slider.
 		m_Slider.value = m_CurrentHealth;
@@ -86,7 +86,7 @@ public class SoldierHealth : MonoBehaviour
     }
 
 
-    private void OnDeath()
+    public void OnDeath()
     {
         // Play the effects for the death of the tank and deactivate it.
 

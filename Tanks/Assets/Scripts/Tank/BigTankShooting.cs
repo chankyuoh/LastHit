@@ -6,7 +6,8 @@ public class BigTankShooting : MonoBehaviour
     public int m_PlayerNumber;       
     public Rigidbody m_Shell; 
 	//public Rigidbody m_Shell2; 
-    public Transform m_FireTransform;   
+    public Transform m_FireTransform;  
+	public Transform m_FireTransform2;  
 	//public Transform m_FireTransform2;   
     public Slider m_AimSlider;           
     public AudioSource m_ShootingAudio;  
@@ -80,13 +81,22 @@ public class BigTankShooting : MonoBehaviour
 		m_Fired = true;
 		//print (m_FireTransform.rotation);
 		//m_FireTransform.rotation.y += 10f;
-		m_FireTransform.Rotate(0,10,0,Space.World);
+		m_FireTransform.Rotate(0,20,0,Space.World);
 		m_FireTransform.rotation = new Quaternion(m_FireTransform.rotation.x,m_FireTransform.rotation.y,m_FireTransform.rotation.z,m_FireTransform.rotation.w);                               
 		Rigidbody shellInstance = Instantiate (m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
 		//Rigidbody shellInstance2 = Instantiate (m_Shell2, m_FireTransform2.position, m_FireTransform2.rotation) as Rigidbody;
 		shellInstance.gameObject.name = "shell" + 3;		
 	
 		shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
+		if (GameManager.onePlayerLeft) {
+			m_FireTransform2.Rotate(0,20,0,Space.World);
+			m_FireTransform2.rotation = new Quaternion(m_FireTransform2.rotation.x,m_FireTransform2.rotation.y,m_FireTransform2.rotation.z,m_FireTransform2.rotation.w);                               
+			Rigidbody shellInstance2 = Instantiate (m_Shell, m_FireTransform2.position, m_FireTransform2.rotation) as Rigidbody;
+			//Rigidbody shellInstance2 = Instantiate (m_Shell2, m_FireTransform2.position, m_FireTransform2.rotation) as Rigidbody;
+			shellInstance2.gameObject.name = "shell" + 3;		
+
+			shellInstance2.velocity = (m_CurrentLaunchForce-7f) * m_FireTransform2.forward;
+		}
 		//shellInstance2.velocity = m_CurrentLaunchForce * m_FireTransform2.forward;
 
 		m_ShootingAudio.clip = m_FireClip;
